@@ -1,1 +1,61 @@
-<h1>Hello</h1>
+<h2>IDF-basics</h2>
+<p>When I was working on a project for school. I needed to work with the Arduino framework.
+    The Arduino framework is a good framework for beginners, but if you use it on a big project, it will break at some point.
+    That was the reason that i wanted to checkout the IDF library. I had heard in the school course that the Arduino's use a microchip called Atmega 328p. This microprocessor uses the AVRlib.
+    This is a framework different than the Arduino framework. This framework was also more difficult to learn. So for my own projects i wanted to learn the framework for the ESP32 WROOM.
+</p>
+
+<p>
+    The ESP32 WROOM is from a company called Espressif. The developers at Espressif made a framework called IDF (IoT Development Framework). This is a framework for the microprocessor like AVRlib.
+</p>
+
+<h3>What is this document about</h3>
+
+<p>In this document I will program a basic program on the ESP32 with the IDF framework. This will be used in a futher project of mine.</p>
+
+<h3>Techstack</h3>
+
+<table class="uk-table uk-table-striped">
+    <thead>
+        <tr>
+            <th>Attribute</th>
+            <th>What i used</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>IDE</td>
+            <td>Visual Studio Code with the PlatformIO extension</td>
+        </tr>
+        <tr>
+            <td>Framework</td>
+            <td>IDF</td>
+        </tr>
+        <tr>
+            <td>microcontroller</td>
+            <td>Espressif ESP32 WROOM</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Sources</h3>
+
+<p>I've used the following sources for this tutorial. (Special thanks to them!!!)</p>
+
+<ul>
+    <li><a href="https://exploreembedded.com/wiki/Hello_World_with_ESP32_Explained">ExploreEmbedded</a></li>
+    <li><a href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/index.html">Espressif</a></li>
+</ul>
+
+<h3>Basic Hello world</h3>
+
+<p>For a noob in IDF, it is always good to start with printing "Hello world" over the Serial-bus.
+    With that in mind i wanted to take a look how to make a standard program.
+</p>
+
+<p>If you start a project in PlatformIO with the IDF framework, you get the following code for free.</p>
+
+<pre><code class="language-cpp">void app_main() {
+
+}</code>
+</pre>

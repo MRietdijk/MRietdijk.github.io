@@ -26,9 +26,3 @@ const getQueryParameter = () => {
       });
       return params.page;
 }
-
-document.onreadystatechange = async () => {
-    if (document.readyState === 'complete') {
-        await loadPage()
-    }
-}
