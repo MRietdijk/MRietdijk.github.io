@@ -5,8 +5,72 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MRietdijk</title>
+    <link rel="stylesheet" href="css/uikit.min.css" />
+    <script src="js/uikit.min.js"></script>
+    <script src="js/uikit-icons.min.js"></script>
+    <script src="js/loadPage.js"></script>
 </head>
 <body>
-    <h1>Hello world!!!!</h1>
+    <nav class="uk-navbar-container">
+        <div class="uk-container">
+            <div uk-navbar>
+    
+                <div class="uk-navbar-left">
+                    
+                    <ul class="uk-navbar-nav">
+                        <li>
+                            <a href="#offcanvas-slide" uk-toggle><span uk-icon="icon: table"></span></a>
+                        </li>
+                        <a class="uk-navbar-item uk-logo" href="index.html" aria-label="Back to Home">MRietdijk</a>
+                    </ul>
+    
+                </div>
+    
+            </div>
+        </div>
+    </nav>
+    <div class="uk-container uk-margin">
+        <div id="content" class="uk-card uk-card-default uk-card-body">
+            <h2>Hello world!</h2>
+            <p>Welcome to the information page of MRietdijk! Here you can find information about multiple Computer Science subjects, like: Embedded software development, Artificial intellegence, web development, and more.</p>
+            <h2>My Goal</h2>
+            <p>I'm a Computer Science student (majoring in Embedded software development) who likes to learn new subject and start projects. In the journey of starting new project, I learn a lot of new subjects. My goal with this page is to document all my findings in new subjects.</p>
+            <h2>For who is this</h2>
+            <p>This website is for people who (like me) are interested in Computer Science. Mostly all of my content will be tutorials on Embedded software on a intermediate level. For more beginner friendly tutorials, I would advice to look a bit futher on the internet. There are a lot of good sources online who will teach you the basics of programming.
+                The subjects what i will be talking about are from projects of my own. Which will include very specific problems that i encounter.
+            </p>
+            <h2>TLDR</h2>
+            <ul>
+                <li>This is a information page on all kinds of programming subjects</li>
+                <li>This is ment for intermediate programmers</li>
+                <li>Mostly you will find information about Embedded software development</li>
+            </ul>
+        </div>
+    </div>
+    <div id="offcanvas-slide" uk-offcanvas>
+        <div class="uk-offcanvas-bar">
+    
+            <ul class="uk-nav uk-nav-default">
+                <li class="uk-nav-header">Embedded software development</li>
+                <div class="uk-width-1-2@s uk-width-2-5@m">
+                    <ul class="uk-nav-default" uk-nav>
+                        <li class="uk-parent">
+                            <a>ESP32 WROOM</a>
+                            <ul class="uk-nav-sub">
+                                <li>
+                                    <a>IDF</a>
+                                    <ul>
+                                        <li><a href="index.html?page=IDF-basics">Basics</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <li class="uk-nav-divider"></li>
+            </ul>
+    
+        </div>
+    </div>
 </body>
 </html>
