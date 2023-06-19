@@ -55,7 +55,65 @@
 
 <p>If you start a project in PlatformIO with the IDF framework, you get the following code for free.</p>
 
-<pre><code class="language-cpp">void app_main() {
+<pre><code class="language-c">void app_main() {
 
 }</code>
 </pre>
+
+<p>This is te same main method as you know in C or C++. The code in this block will run once until the ESP restarts.</p>
+
+<p>To print a line over the serial-bus in IDF you need the following libraries:</p>
+
+<pre>
+    <code class="language-c">#include &#60;stdio.h&#62;
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "nvs_flash.h"</code>
+</pre>
+
+<p>The first one is a known one for the c coders. This is the standard input output library of c.
+    This library is made so it will work for serial communication now.
+    The second library is for the use of FreeRTOS. FreeRTOS is a Free "Real Time Operating System". In normal words: it is a time manager that manages tasks and put them in a order so every tasks gets CPU time on time.
+    For more information on FreeRTOS search the internet. There are a lot of tutorials on how to use FreeRTOS on the internet.
+    The third library is also for FreeRTOS. It gets the function to make a task for FreeRTOS to schedule.
+    The Third library imports a function, which we can use to place the programdata to a external flash-module on the board.
+    I could talk alot about these libraries here, but we can also implement it!
+</p>
+
+<pre>
+    <code class="language-c">void app_main() {
+    nvs_flash_init();
+    xTaskCreate(&hello_task, "Hello_task", 2048, NULL, 5, NULL);
+}</code>
+</pre>
+
+<p>The first function we call is the non-volatile flash initialiser. This function allows to flash the memory on the board, instead of the microprocessors volitile flash memory.
+    After the first function call, we create a task. This task will schedule via the FreeRTOS library. Why do we use the FreeRTOS library? Because it is a good way to handle tasks and we don't have to program software-timers or timer interrupts.
+    FreeRTOS does this for us. The first parameters gives a adress of the function "hello_task", the second parameter is the name of the task (this could be anything). After this parameter you give the memory allocated for this function. The parameters after this we will discuss later.
+</p>
+
+<p>It is time to make the function "hello_task"</p>
+
+<pre>
+    <code class="language-c">void hello_task(void *pvParameter) {
+    while(1) {
+        printf("Hello world!\n");
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
+    }
+}</code>
+</pre>
+
+<p>First you see a while loop. This is a loop to simulate the loop function in the Arduino framework. After that you see a printf.
+    The printf is standard C to print a message to the console. Now we are going to use it for printing via the serial-bus.
+    After the printf is a delay. This is a delay as you know him like the delay in the Arduino framework, but this delay does not pause the program.
+    If this delay is triggered a other task in FreeRTOS can be busy in this time. So if you have another task. This task would have the CPU time.
+</p>
+
+<p>Now run this code and you will see a console with every second a new "Hello world!"</p>
+
+<h3>TLDR</h3>
+<ul>
+    <li>The main method of IDF is app_main().</li>
+    <li>Use FreeRTOS to make the program run Real Time.</li>
+    <li>Use the stdio.h library for Serial communication.</li>
+</ul>
