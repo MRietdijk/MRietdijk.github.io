@@ -9,6 +9,17 @@
     <script src="js/uikit.min.js"></script>
     <script src="js/uikit-icons.min.js"></script>
     <script src="js/loadPage.js"></script>
+    <link rel="stylesheet" href="css/styles/tokyo-night-dark.min.css">
+    <script src="js/highlight.min.js"></script>
+    <script>
+        document.onreadystatechange = async () => {
+            if (document.readyState === 'complete') {
+                await loadPage()
+                hljs.highlightAll()
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
     <nav class="uk-navbar-container">
@@ -45,6 +56,9 @@
                 <li>This is ment for intermediate programmers</li>
                 <li>Mostly you will find information about Embedded software development</li>
             </ul>
+            <pre><code class="language-cpp">void app_main() {
+
+            }</code>
         </div>
     </div>
     <div id="offcanvas-slide" uk-offcanvas>

@@ -1,0 +1,7 @@
+pre {
+    all: unset!important;
+    display: block!important;
+    font-family: monospace!important;
+    white-space: pre!important;
+    margin: 1em 0!important;
+}

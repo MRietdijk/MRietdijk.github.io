@@ -1,1 +1,119 @@
-<h1>Hello</h1>
+<h2>IDF-basics</h2>
+<p>When I was working on a project for school. I needed to work with the Arduino framework.
+    The Arduino framework is a good framework for beginners, but if you use it on a big project, it will break at some point.
+    That was the reason that i wanted to checkout the IDF library. I had heard in the school course that the Arduino's use a microchip called Atmega 328p. This microprocessor uses the AVRlib.
+    This is a framework different than the Arduino framework. This framework was also more difficult to learn. So for my own projects i wanted to learn the framework for the ESP32 WROOM.
+</p>
+
+<p>
+    The ESP32 WROOM is from a company called Espressif. The developers at Espressif made a framework called IDF (IoT Development Framework). This is a framework for the microprocessor like AVRlib.
+</p>
+
+<h3>What is this document about</h3>
+
+<p>In this document I will program a basic program on the ESP32 with the IDF framework. This will be used in a futher project of mine.</p>
+
+<h3>Techstack</h3>
+
+<table class="uk-table uk-table-striped">
+    <thead>
+        <tr>
+            <th>Attribute</th>
+            <th>What i used</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>IDE</td>
+            <td>Visual Studio Code with the PlatformIO extension</td>
+        </tr>
+        <tr>
+            <td>Framework</td>
+            <td>IDF</td>
+        </tr>
+        <tr>
+            <td>microcontroller</td>
+            <td>Espressif ESP32 WROOM</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Sources</h3>
+
+<p>I've used the following sources for this tutorial. (Special thanks to them!!!)</p>
+
+<ul>
+    <li><a href="https://exploreembedded.com/wiki/Hello_World_with_ESP32_Explained">ExploreEmbedded</a></li>
+    <li><a href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/index.html">Espressif</a></li>
+</ul>
+
+<h3>Basic Hello world</h3>
+
+<p>For a noob in IDF, it is always good to start with printing "Hello world" over the Serial-bus.
+    With that in mind i wanted to take a look how to make a standard program.
+</p>
+
+<p>If you start a project in PlatformIO with the IDF framework, you get the following code for free.</p>
+
+<pre><code class="language-c">void app_main() {
+
+}</code>
+</pre>
+
+<p>This is te same main method as you know in C or C++. The code in this block will run once until the ESP restarts.</p>
+
+<p>To print a line over the serial-bus in IDF you need the following libraries:</p>
+
+<pre>
+    <code class="language-c">#include &#60;stdio.h&#62;
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "nvs_flash.h"</code>
+</pre>
+
+<p>The first one is a known one for the c coders. This is the standard input output library of c.
+    This library is made so it will work for serial communication now.
+    The second library is for the use of FreeRTOS. FreeRTOS is a Free "Real Time Operating System". In normal words: it is a time manager that manages tasks and put them in a order so every tasks gets CPU time on time.
+    For more information on FreeRTOS search the internet. There are a lot of tutorials on how to use FreeRTOS on the internet.
+    The third library is also for FreeRTOS. It gets the function to make a task for FreeRTOS to schedule.
+    The Third library imports a function, which we can use to place the programdata to a external flash-module on the board.
+    I could talk alot about these libraries here, but we can also implement it!
+</p>
+
+<pre>
+    <code class="language-c">void app_main() {
+    nvs_flash_init();
+    xTaskCreate(&hello_task, "Hello_task", 2048, NULL, 5, NULL);
+}</code>
+</pre>
+
+<p>The first function we call is the non-volatile flash initialiser. This function allows to flash the memory on the board, instead of the microprocessors volitile flash memory.
+    After the first function call, we create a task. This task will schedule via the FreeRTOS library. Why do we use the FreeRTOS library? Because it is a good way to handle tasks and we don't have to program software-timers or timer interrupts.
+    FreeRTOS does this for us. The first parameters gives a adress of the function "hello_task", the second parameter is the name of the task (this could be anything). After this parameter you give the memory allocated for this function. The parameters after this we will discuss later.
+</p>
+
+<p>It is time to make the function "hello_task"</p>
+
+<pre>
+    <code class="language-c">void hello_task(void *pvParameter) {
+    while(1) {
+        printf("Hello world!\n");
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
+    }
+}</code>
+</pre>
+
+<p>First you see a while loop. This is a loop to simulate the loop function in the Arduino framework. After that you see a printf.
+    The printf is standard C to print a message to the console. Now we are going to use it for printing via the serial-bus.
+    After the printf is a delay. This is a delay as you know him like the delay in the Arduino framework, but this delay does not pause the program.
+    If this delay is triggered a other task in FreeRTOS can be busy in this time. So if you have another task. This task would have the CPU time.
+</p>
+
+<p>Now run this code and you will see a console with every second a new "Hello world!"</p>
+
+<h3>TLDR</h3>
+<ul>
+    <li>The main method of IDF is app_main().</li>
+    <li>Use FreeRTOS to make the program run Real Time.</li>
+    <li>Use the stdio.h library for Serial communication.</li>
+</ul>
